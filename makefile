@@ -17,7 +17,7 @@ $(NAME): $(SRCS)
 
 #clean:
 
-fclean: $(NAME)
+fclean:
 				rm -rf $(NAME)
 
-#re:
+re: fclean all

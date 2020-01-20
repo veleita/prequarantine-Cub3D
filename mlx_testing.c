@@ -1,8 +1,12 @@
 #include <mlx.h>
 #include <stdio.h>
 #include <math.h>
-
-typedef struct  s_data {
+#include <unistd.h>
+/*
+ * ---------------------------------STRUCTS------------------------------------
+ */
+typedef struct  s_data 
+{
     void        *img;
     char        *addr;
     int         bits_per_pixel;
@@ -10,6 +14,29 @@ typedef struct  s_data {
     int         endian;
 }               t_data;
 
+typedef struct s_mlx
+{
+	void		*mlx;
+	void		*win;
+}				t_mlx;
+
+typedef struct	s_color
+{
+	int			t;
+	int			r;
+	int			g;
+	int			b;
+}				t_color;
+/*
+ * -------------------------------COLOR MANAGEMENT-----------------------------
+ */
+int		create_trgb(int t, int r, int g, int b)
+{
+	return(b << 24 | g << 16 | r << 8 | t);
+}
+/*
+ * ------------------------------IMAGE MANAGEMENT------------------------------
+ */
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
     char    *dst;
@@ -17,20 +44,40 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
     dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
     *(unsigned int*)dst = color;
 }
+/*
+ * -----------------------------------EVENTS-----------------------------------
+ */
+int				close_window(int keycode, t_mlx *mlx)
+{
+	(void) keycode;
+	mlx_destroy_window(mlx->mlx, mlx->win);
+	return (1);
+}
 
+int				print_key(int keycode, t_mlx *mlx)
+{
+	(void)mlx;
+	printf("%d\n", keycode);
+	return (1);
+}
+/*
+ *---------------------------------------MAIN----------------------------------
+ */
 int             main(void)
 {
-    void    *mlx;
-    void    *mlx_win;
-	t_data  img;
-//	int		y;
-//	int		x;
+    t_mlx	mlx;
+	//t_data  img;
+	//int		y;
+	//int		x;
 
-    mlx = mlx_init();
-    mlx_win = mlx_new_window(mlx, 500, 500, "Hello world!");
-    img.img = mlx_new_image(mlx, 500, 500);
-    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								 &img.endian);
+    mlx.mlx = mlx_init();
+    mlx.win = mlx_new_window(mlx.mlx, 500, 500, "Hello world!");
+    //img.img = mlx_new_image(mlx.mlx, 500, 500);
+    //img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+	//							 &img.endian);
+	//mlx_key_hook(mlx.win, close_window, &mlx);
+	mlx_key_hook(mlx.win, print_key, &mlx);
+
 /*
  *---------------------------PRINT A SQUARE------------------------------------
  * 
@@ -51,7 +98,7 @@ int             main(void)
  *		y = sqrt(x*x + 2*x + 8) - 2;
  *	}
  */
-    mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+    //mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_loop(mlx.mlx);
 	return (0);
 }
