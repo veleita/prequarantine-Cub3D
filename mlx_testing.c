@@ -49,8 +49,8 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
  */
 int				close_window(int keycode, t_mlx *mlx)
 {
-	(void) keycode;
-	mlx_destroy_window(mlx->mlx, mlx->win);
+	if (keycode == 53)
+		mlx_destroy_window(mlx->mlx, mlx->win);
 	return (1);
 }
 
@@ -75,8 +75,8 @@ int             main(void)
     //img.img = mlx_new_image(mlx.mlx, 500, 500);
     //img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 	//							 &img.endian);
-	//mlx_key_hook(mlx.win, close_window, &mlx);
-	mlx_key_hook(mlx.win, print_key, &mlx);
+	mlx_key_hook(mlx.win, close_window, &mlx);
+	//mlx_key_hook(mlx.win, print_key, &mlx);
 
 /*
  *---------------------------PRINT A SQUARE------------------------------------
