@@ -57,6 +57,8 @@ int				close_window(int keycode, t_mlx *mlx)
 int				print_key(int keycode, t_mlx *mlx)
 {
 	(void)mlx;
+	//(void)keycode;
+	//write(1, "c", 1);
 	printf("%d\n", keycode);
 	return (1);
 }
@@ -66,31 +68,31 @@ int				print_key(int keycode, t_mlx *mlx)
 int             main(void)
 {
     t_mlx	mlx;
-	//t_data  img;
-	//int		y;
-	//int		x;
+	t_data  img;
+	int		y = 0;
+	int		x = 0;
 
     mlx.mlx = mlx_init();
     mlx.win = mlx_new_window(mlx.mlx, 500, 500, "Hello world!");
-    //img.img = mlx_new_image(mlx.mlx, 500, 500);
-    //img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-	//							 &img.endian);
-	mlx_key_hook(mlx.win, close_window, &mlx);
+    img.img = mlx_new_image(mlx.mlx, 500, 500);
+    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+								 &img.endian);
+	//mlx_key_hook(mlx.win, close_window, &mlx);
 	//mlx_key_hook(mlx.win, print_key, &mlx);
 
 /*
  *---------------------------PRINT A SQUARE------------------------------------
- * 
- *	while (250 - x == 250 - y)
- *		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
- *	while (x++ < 250)
- *		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
- *	while (y-- > 100)
- *		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
- *	while (x-- > 100)
- *		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
- */
-/*
+ */ 
+ 	while (y++ < 250)
+ 		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
+ 	while (x++ < 250)
+ 		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
+ 	while (y-- > 100)
+ 		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
+ 	while (x-- > 100)
+ 		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
+ /*/
+*
  * --------------------------PRINT A CIRCLE------------------------------------
  *	while (x++ < 200)
  *	{
@@ -98,7 +100,7 @@ int             main(void)
  *		y = sqrt(x*x + 2*x + 8) - 2;
  *	}
  */
-    //mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+    mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
 	mlx_loop(mlx.mlx);
 	return (0);
 }
