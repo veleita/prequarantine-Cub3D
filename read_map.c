@@ -155,12 +155,37 @@ int			get_next_line(int fd, char **line)
 	return ((len == 0 && !file[fd]) ? empty(line) : get_line(file, fd, line));
 }
 
+typedef struct s_map
+{
+	int resolution;
+	int no;
+	int ea;
+	int we;
+	int so;
+	int sprt;
+	int floor;
+	int ceiling;
+	int x_max;
+	int y_max;
+}		t_map;
+
 int main(int argc, char **argv)
 {
 	char *line = 0;
 	int fd = open(argv[1], O_RDONLY);
+	t_map *map;
 
-	get_next_line(fd, &line);
-	printf("%s\n", line);
+	if ((get_next_line(fd, &line) <= 0))
+		return (0);
+	if (ft_strchr(line, 'R'))
+		return ((get_resolution(line, map) == 1) ? 1 : 0);
+	else if (ft_strnstr(line, "NO", ft_strlen(line)))
+		return ((get_NO_texture(line, map) == 1) ? 1 : 0);
+	else if (ft_strnstr(line, "EA", ft_strlen(line)))
+		return ((get_EA_texture(line, map) == 1) ? 1 : 0);
+	else if (ft_strnstr(line, "WE", ft_strlen(line)))
+		return ((get_WE_texture(line, map) == 1) ? 1 : 0);
+	else if (ft_strnstr(line, "NO", ft_strlen(line)))
+		return ((get_SO_texture(line, map) == 1) ? 1 : 0);
 	return (0);
 }
