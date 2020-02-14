@@ -2,8 +2,8 @@
 
 static int	init(t_var *var)
 {
-	var->posx = 2.5;
-	var->posy = 9.5;
+	var->posx = 4.5;
+	var->posy = 8.5;
 	var->dirX = -1;
 	var->dirY = 0;
 	var->planeX = 0;
@@ -15,7 +15,7 @@ static int	init(t_var *var)
 
 	if (!(var->mlx = mlx_init()))
 		return (0);
-	if (!(var->win = mlx_new_window(var->mlx, var->screenWidth, var->screenHeight, "z")))
+	if (!(var->win = mlx_new_window(var->mlx, var->screenWidth, var->screenHeight, "cub3D")))
 		return (0);
 	if (!(var->img.id = mlx_new_image(var->mlx, var->screenWidth, var->screenHeight)))
 		return (0);
@@ -35,6 +35,10 @@ int	main()
 	//	return (-1);
 	if (!(init(var)))
 		return (-1);
+	mlx_hook(var->win, 17, 0, &finish, var);
+	mlx_hook(var->win, 2, 0, &key_pressed, var);
+	mlx_hook(var->win, 3, 0, &key_released, var);
+	mlx_loop_hook(var->mlx, &move_player, var);
 	mlx_loop(var->mlx);
 	return (0);
 }
