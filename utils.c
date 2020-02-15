@@ -1,4 +1,5 @@
 #include "cub3D.h"
+#include <unistd.h>
 
 int		ft_strcmp(const char *s1, const char *s2)
 {
