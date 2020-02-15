@@ -594,7 +594,7 @@ int main(int argc, char **argv)
 	if (!(map = (t_map*)malloc(sizeof(t_map))))
 		return (0);
 	init_map(map);
-	/*while ((len = get_next_line(fd, &line) > 0))
+	while ((len = get_next_line(fd, &line) > 0))
 	{
 		printf("line = %s\n", line);
 		if (ft_strchr(line, 'R'))

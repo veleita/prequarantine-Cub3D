@@ -6,7 +6,14 @@ WFLAGS		= -Werror -Wall -Wextra
 INCLUDES	= -l mlx -I /usr/X11/include
 FRAMEWORKS	= -framework Appkit -framework OpenGL
 
-SRCS		= main.c render.c utils.c print_world.c raycasting.c movement.c exit.c key_events.c
+SRCS		= main.c \
+			  render.c \
+			  utils.c \
+			  print_world.c \
+			  raycasting.c \
+			  movement.c \
+			  exit.c \
+			  key_events.c \
 
 all:		$(NAME)
 				./$(NAME)
