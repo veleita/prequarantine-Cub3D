@@ -2,7 +2,7 @@
 
 void	get_side_dist(int x, t_var *var)
 {
-	var->ray.cameraX = 2 * x / (double)var->screenWidth - 1;
+	var->ray.cameraX = 2 * x / (double)var->file.resolutionX - 1;
 
 	var->ray.raydirx = var->dirX + var->planeX * var->ray.cameraX;
 	var->ray.raydiry = var->dirY + var->planeY * var->ray.cameraX;
@@ -30,7 +30,7 @@ void	get_side_dist(int x, t_var *var)
 			var->ray.deltadisty;
 }
 
-void	get_hit(t_var *var, int map[16][29])
+void	get_hit(t_var *var)
 {
 	var->ray.hit = 0;
 	while (var->ray.hit == 0)
@@ -47,7 +47,7 @@ void	get_hit(t_var *var, int map[16][29])
 			var->ray.mapy += var->ray.stepy;
 			var->ray.side = 1;
 		}
-		if (map[var->ray.mapx][var->ray.mapy] > 0)
+		if (var->map[var->ray.mapx][var->ray.mapy] > 0)
 			var->ray.hit = 1;
 	}
 }
@@ -61,12 +61,12 @@ void		get_wall(t_var *var)
 		var->ray.perpWallDist = (var->ray.mapy - var->posy +
 				(1 - var->ray.stepy) / 2.) / var->ray.raydiry;
 	var->ray.perpWallDist *= var->ray.perpWallDist < 0 ? -1 : 1;
-	var->ray.lineHeight = (int)(var->screenHeight /
+	var->ray.lineHeight = (int)(var->file.resolutionY /
 			var->ray.perpWallDist);
-	var->ray.drawStart = var->screenHeight / 2 - var->ray.lineHeight / 2;
+	var->ray.drawStart = var->file.resolutionY / 2 - var->ray.lineHeight / 2;
 	var->ray.drawStart = (var->ray.drawStart < 0) ?
 		0 : var->ray.drawStart;
-	var->ray.drawEnd = var->screenHeight / 2 + var->ray.lineHeight / 2;
-	var->ray.drawEnd = (var->ray.drawEnd >= var->screenHeight) ?
-		var->screenHeight - 1 : var->ray.drawEnd;
+	var->ray.drawEnd = var->file.resolutionY / 2 + var->ray.lineHeight / 2;
+	var->ray.drawEnd = (var->ray.drawEnd >= var->file.resolutionY) ?
+		var->file.resolutionY - 1 : var->ray.drawEnd;
 }

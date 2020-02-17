@@ -3,11 +3,11 @@
 void	vertical_movement(t_var *var, double movement_speed, double dirx,
 		double diry)
 {
-	printf("no %d\n", var->map.map[3][8]);
+	//printf("no %d\n", var->map[3][8]);
 	//var->map.map[1][1] = 0;
-	if (var->map.map[1][1] == 0)
+	if (var->map[1][1] == 0)
 		var->posx += dirx * movement_speed;
-	if (var->map.map[1][1] == 0)
+	if (var->map[1][1] == 0)
 		var->posy += diry * movement_speed;
 }
 

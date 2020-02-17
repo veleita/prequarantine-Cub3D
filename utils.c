@@ -42,6 +42,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 			set++;
 		}
 		if (*set == '\0')
+			return ((char*)haystack);
 		haystack++;
 		--len;
 	}
@@ -60,6 +61,14 @@ void	ft_bzero(void *s, size_t n)
 int		ft_isdigit(int c)
 {
 	if ('0' <= c && c <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+int		ft_isalpha(int c)
+{
+	if ('a' <= c && c <= 'z')
 		return (1);
 	else
 		return (0);
@@ -137,7 +146,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ret);
 }
 
-static int	ft_strchr(char *s, char c)
+int	ft_strchr(char *s, char c)
 {
 	int	it;
 

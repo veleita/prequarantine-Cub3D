@@ -14,6 +14,8 @@ SRCS		= main.c \
 			  movement.c \
 			  exit.c \
 			  key_events.c \
+			  read_map.c \
+			  charge_map.c \
 
 all:		$(NAME)
 				./$(NAME)

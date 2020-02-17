@@ -3,8 +3,7 @@
 void	render(t_var *var)
 {
 	int x;
-
-	ft_bzero(var->img.addr, var->screenWidth * var->screenHeight);
+/*
 	int map[16][29]=
 	{
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -23,14 +22,14 @@ void	render(t_var *var)
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,1,0,0,1,0,0,0,1},
 		{1,1,0,0,0,0,0,0,1,1,0,1,0,1,0,1,1,1,1,1,0,1,1,1,1,0,0,0,1},
 		{1,1,1,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,0,0,0,1}
-	};
+	};*/
 	x = -1;
-	while (++x < var->screenWidth)
+	while (++x < var->file.resolutionX)
 	{
 		get_side_dist(x, var);
-		get_hit(var, map);
+		get_hit(var);
 		get_wall(var);
 		print_column(var, x);
 	}
-	mlx_put_image_to_window(var->mlx, var->win, var->img.id, 0, 0);
+	//mlx_put_image_to_window(var->mlx, var->win, var->img.id, 0, 0);
 }
