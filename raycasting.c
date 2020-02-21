@@ -4,8 +4,8 @@ void	get_side_dist(int x, t_var *var)
 {
 	var->ray.cameraX = 2 * x / (double)var->file.resolutionX - 1;
 
-	var->ray.raydirx = var->dirX + var->planeX * var->ray.cameraX;
-	var->ray.raydiry = var->dirY + var->planeY * var->ray.cameraX;
+	var->ray.raydirx = var->camera.dirX + var->camera.planeX * var->ray.cameraX;
+	var->ray.raydiry = var->camera.dirY + var->camera.planeY * var->ray.cameraX;
 
 	var->ray.mapx = (int)var->posx;
 	var->ray.mapy = (int)var->posy;
@@ -47,7 +47,7 @@ void	get_hit(t_var *var)
 			var->ray.mapy += var->ray.stepy;
 			var->ray.side = 1;
 		}
-		if (var->map[var->ray.mapx][var->ray.mapy] > 0)
+		if (var->file.map[var->ray.mapy][var->ray.mapx] > 0)
 			var->ray.hit = 1;
 	}
 }

@@ -17,6 +17,8 @@ size_t		ft_strlen(const char *s)
 {
 	size_t	i;
 
+	if (!s)
+		return (0);
 	i = 0;
 	while (s[i])
 		i++;
@@ -29,6 +31,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	const char	*set;
 	size_t		size;
 
+	if (!haystack)
+		return (NULL);
 	if (!*needle)
 		return ((char*)haystack);
 	while (*haystack && len > 0)
@@ -68,7 +72,7 @@ int		ft_isdigit(int c)
 
 int		ft_isalpha(int c)
 {
-	if ('a' <= c && c <= 'z')
+	if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z'))
 		return (1);
 	else
 		return (0);
@@ -132,15 +136,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
-	if (!s1 || !s2)
-		return (NULL);
 	if (!(ret = malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
 		return (NULL);
 	i = -1;
-	while (s1[++i])
+	while (s1 && s1[++i])
 		ret[i] = s1[i];
 	j = -1;
-	while (s2[++j])
+	while (s2 && s2[++j])
 		ret[i++] = s2[j];
 	ret[i] = '\0';
 	return (ret);
@@ -150,6 +152,8 @@ int	ft_strchr(char *s, char c)
 {
 	int	it;
 
+	if (!s)
+		return (0);
 	it = 0;
 	while (s[it])
 	{
@@ -194,9 +198,9 @@ int			get_next_line(int fd, char **line)
 	int				len;
 	char			*tmp;
 
-	if (!line || fd < 0 || !(buffer = (char *)malloc(100)))
+	if (!line || fd < 0 || !(buffer = (char *)malloc(11)))
 		return (-1);
-	while ((len = read(fd, buffer, 100)) > 0)
+	while ((len = read(fd, buffer, 11)) > 0)
 	{
 		buffer[len] = '\0';
 		if (file[fd] == NULL)

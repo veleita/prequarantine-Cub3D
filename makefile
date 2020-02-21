@@ -18,7 +18,7 @@ SRCS		= main.c \
 			  charge_map.c \
 
 all:		$(NAME)
-				./$(NAME)
+				./$(NAME) maps/map1basic.cub
 
 mlx:
 				$(CC) $(WFLAGS) $(INCLUDES) $(FRAMEWORKS) mlx_testing.c && ./a.out
@@ -26,7 +26,7 @@ mlx:
 map:
 				$(CC) $(WFLAGS) $(INCLUDES) $(FRAMEWORKS) read_map.c && ./a.out
 $(NAME): $(SRCS)
-				$(CC) $(WFLAGS) $(INCLUDES) $(FRAMEWORKS) $(SRCS) -o $(NAME)
+				$(CC) -g $(WFLAGS) $(INCLUDES) $(FRAMEWORKS) $(SRCS) -o $(NAME)
 
 map:
 				rm -rf map

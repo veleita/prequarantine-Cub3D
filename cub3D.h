@@ -25,6 +25,7 @@ typedef struct	s_map
 	t_color		ceiling_rgb;//
 	int			x;//
 	int			y;//
+	int			**map;
 }				t_map;
 
 typedef struct	s_img
@@ -77,27 +78,31 @@ typedef struct	s_key
 				int right;//
 }				t_key;
 
+typedef struct	s_camera
+{
+	double		dirX;//
+	double		dirY;//
+	double		planeX;//
+	double		planeY;//
+}				t_camera;
+
 typedef struct	s_var
 {
 	void		*mlx;//
 	void		*win;//
 	double		posx;//
 	double		posy;//
-	double		dirX;//
-	double		dirY;//
-	double		planeX;//
-	double		planeY;//
-	int			**map;
+	t_camera	camera;
 	t_ray		ray;
 	t_map		file;
 	t_img		img;
 	t_key		key;
 }				t_var;
 
-int		read_map(char *file_name, t_var *var, int fd);
-void	fill_map(char *line, int **map, int y);
-int		**create_map(char *file_name, int x, int y);
-int		check_coord(char coord, t_map *map, int x, t_var *var);
+t_map			read_map(char *file_name, t_var *var, int fd);
+void			fill_map(char *line, int **map, int y);
+int				**create_map(char *file_name, int x, int y);
+t_camera		check_coord(char coord, t_map *map, int x, t_var *var);
 
 void	render(t_var *var);
 
