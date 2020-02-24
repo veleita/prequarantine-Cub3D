@@ -5,17 +5,23 @@ void	vertical_movement(t_var *var, double movement_speed, double dirx,
 {
 	//printf("no %d\n", var->map[3][8]);
 	//var->map.map[1][1] = 0;
-	if (var->file.map[1][1] == 0)
+	if (var->file.map[(int)(var->posx + dirx * 1)][(int)var->posy] == 0)
 		var->posx += dirx * movement_speed;
-	if (var->file.map[1][1] == 0)
+	printf("\nmovement to X %d\n", var->file.map[(int)(var->posx + dirx * 1)][(int)(var->posy)]);
+	if (var->file.map[(int)var->posx][(int)(var->posy + diry * 1)] == 0)
 		var->posy += diry * movement_speed;
+	printf("\nmovement to Y %d\n", var->file.map[(int)var->posx][(int)(var->posy + diry * 0.06)]);
 }
 
 void	horizontal_movement(t_var *var, double movement_speed, double planeX,
 		double planeY)
 {
-	var->posx += planeX * movement_speed;
-	var->posy += planeY * movement_speed;
+	//printf("h");
+	if (var->file.map[(int)(var->posx + planeX * 1)][(int)var->posy] == 0)
+		var->posx += planeX * movement_speed;
+	if (var->file.map[(int)var->posx][(int)(var->posy + planeY * 1)] == 0)
+		var->posy += planeY * movement_speed;
+	//printf("h");
 }
 
 void	rotation(t_var *var, double rotation_speed)

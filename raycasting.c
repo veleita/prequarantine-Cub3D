@@ -28,6 +28,7 @@ void	get_side_dist(int x, t_var *var)
 	else
 		var->ray.sidedisty = (var->ray.mapy + 1.0 - var->posy) *
 			var->ray.deltadisty;
+	printf("ray dir Y : %f\n", var->ray.raydiry);
 }
 
 void	get_hit(t_var *var)
@@ -47,7 +48,7 @@ void	get_hit(t_var *var)
 			var->ray.mapy += var->ray.stepy;
 			var->ray.side = 1;
 		}
-		if (var->file.map[var->ray.mapy][var->ray.mapx] > 0)
+		if (var->file.map[var->ray.mapx][var->ray.mapy] > 0)
 			var->ray.hit = 1;
 	}
 }

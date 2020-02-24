@@ -14,7 +14,7 @@ static t_camera	*set_dir_plane(double dirX, double dirY,
 	return (camera);
 }
 
-t_camera	check_coord(char coord, t_map *map, int x, t_var *var)
+t_camera	check_coord(char coord, t_map *map, int y, t_var *var)
 {
 	t_camera *camera;
 
@@ -26,29 +26,33 @@ t_camera	check_coord(char coord, t_map *map, int x, t_var *var)
 		camera = set_dir_plane(1, 0, 0, -0.66);
 	if (coord == 'W')
 		camera = set_dir_plane(-1, 0, 0, 0.66);
-	var->posx = x + 0.5;
-	var->posy = map->y + 0.5;
+	var->posx = map->x + 0.5;
+	var->posy = y + 0.5;
 	return (*camera);
 }
 
-void	fill_map(char *line, int **map, int y)
+void	fill_map(char *line, int **map, int x)
 {
 	int		it;
-	int		x;
+	int		y;
 
 	it = 0;
-	x = 0;
+	y = 0;
+	//printf("\nline %s\n\n", line);
 	while (line[it] != '\0')
 	{
 		if (ft_isdigit(line[it]))
 		{
-			map[y][x] = line[it] - '0';
-			x++;
+			map[x][y] = line[it] - 48;
+			printf("%d ", map[x][y]);
+			y++;
+			//printf("?line[it] %d  it %d?\n", line[it], it);
 		}
 		else if (ft_isalpha(line[it]))
 		{
-			map[y][x] = 0;
-			x++;
+			map[x][y] = 0;
+			printf("%d ", map[x][y]);
+			y++;
 		}
 		it++;
 	}
@@ -60,28 +64,34 @@ int	**create_map(char *file_name, int x, int y)
 	int		fd;
 	char	*line;
 
-	if (!(map = (int**)malloc(y * sizeof(int*))))
+	x -= 1;
+	if (!(map = (int**)malloc(x * sizeof(int*))))
 		return (0);
 	fd = open(file_name, O_RDONLY);
-	while (y > 0)
+	while (x >= 0)
 	{
 		get_next_line(fd, &line);
-		if (ft_strnstr(line, "1 ", x))
+		if (ft_strnstr(line, "1 ", y))
 		{
-			if (!(map[y] = (int*)malloc(x * sizeof(int))))
+			if (!(map[x] = (int*)malloc(y * sizeof(int))))
 				return (0);
-			fill_map(line, map, y);
-			y--;
+			fill_map(line, map, x);
+			printf("\n");
+			x--;
 		}
 	}
+	//if (!(map[x] = (int*)malloc(y * sizeof(int))))
+	//	return (0);
+	//fill_map(line, map, x);
+	//printf("end\n");
 	/*if (len == 0)
-	{
-			if (!(map[y] = (int*)malloc(x * sizeof(int))))
-				return (0);
-		fill_map(line, map, y);
-	}
-	else
-		return (0);*/
+	  {
+	  if (!(map[y] = (int*)malloc(x * sizeof(int))))
+	  return (0);
+	  fill_map(line, map, y);
+	  }
+	  else
+	  return (0);*/
 	return (map);
 }
 

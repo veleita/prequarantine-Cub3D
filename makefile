@@ -12,7 +12,6 @@ SRCS		= main.c \
 			  print_world.c \
 			  raycasting.c \
 			  movement.c \
-			  exit.c \
 			  key_events.c \
 			  read_map.c \
 			  charge_map.c \

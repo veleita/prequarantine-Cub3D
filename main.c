@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	var->file = read_map(argv[1], var, fd);
 	if (!(init(var)))
 		return (-1);
-	mlx_hook(var->win, 17, 0, &finish, var);
+	//mlx_hook(var->win, 17, 0, exit, var);
 	mlx_hook(var->win, 2, 0, &key_pressed, var);
 	mlx_hook(var->win, 3, 0, &key_released, var);
 	mlx_loop_hook(var->mlx, &move_player, var);

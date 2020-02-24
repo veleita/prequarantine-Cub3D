@@ -133,7 +133,7 @@ static t_color	get_color(char *line)
 static int	evaluate_map(char *line, int fd, t_map *map, t_var *var)
 {
 	int it;
-	int x;
+	int y;
 	int len;
 
 	if ((map->ceiling_rgb.r == 0 && map->ceiling_rgb.g == 0 &&
@@ -145,7 +145,7 @@ static int	evaluate_map(char *line, int fd, t_map *map, t_var *var)
 	{
 		return (0);//missing information before reading the 2D map, did you
 	//forget something? Remember that your map should be at the
-	//bottom of the file.
+	//bottom of the file.`
 	}
 	it = 0;
 	while (line[it] == ' ' || line[it] == '1')
@@ -153,13 +153,13 @@ static int	evaluate_map(char *line, int fd, t_map *map, t_var *var)
 		if (line[it] == ' ')
 			it++;
 		if (line[it++] == '1')
-			(map->x)++;
+			(map->y)++;
 	}
-	map->y++;
+	map->x++;
 	line = 0;
 	while ((len = get_next_line(fd, &line) > 0))
 	{
-		x = 0;
+		y = 0;
 		it = 0;
 		while (line[it] == ' ')
 			++it;
@@ -171,14 +171,14 @@ static int	evaluate_map(char *line, int fd, t_map *map, t_var *var)
 			if (ft_isalpha(line[it]))
 			{
 				//printf("gdgfs");
-				var->camera = check_coord(line[it], map, x, var);
+				var->camera = check_coord(line[it], map, y, var);
 			}
 			if (line[it++] != ' ')
-				x++;
+				y++;
 		}
-		if (x != map->x)//our map would not be rectangular
+		if (y != map->y)//our map would not be rectangular
 			return (0);
-		map->y++;
+		map->x++;
 	}
 	/*if (len == 0)
 	{

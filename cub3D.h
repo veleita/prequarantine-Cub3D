@@ -100,38 +100,36 @@ typedef struct	s_var
 }				t_var;
 
 t_map			read_map(char *file_name, t_var *var, int fd);
-void			fill_map(char *line, int **map, int y);
+void			fill_map(char *line, int **map, int x);
 int				**create_map(char *file_name, int x, int y);
 t_camera		check_coord(char coord, t_map *map, int x, t_var *var);
 
-void	render(t_var *var);
+void			render(t_var *var);
 
-void	get_side_dist(int x, t_var *var);
-void	get_hit(t_var *var);
-void	get_wall(t_var *var);
-void	print_column(t_var *var, int x);
+void			get_side_dist(int x, t_var *var);
+void			get_hit(t_var *var);
+void			get_wall(t_var *var);
+void			print_column(t_var *var, int x);
 
-int		ft_strcmp(const char *s1, const char *s2);
-size_t	ft_strlen(const char *s);
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-void	ft_bzero(void *s, size_t n);
-int		ft_isdigit(int c);
-int		ft_isalpha(int c);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-char	*ft_strdup(const char *s1);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strchr(char *s, char c);
-int		get_next_line(int fd, char **line);
+int				ft_strcmp(const char *s1, const char *s2);
+size_t			ft_strlen(const char *s);
+char			*ft_strnstr(const char *haystack, const char *needle, size_t len);
+void			ft_bzero(void *s, size_t n);
+int				ft_isdigit(int c);
+int				ft_isalpha(int c);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
+char			*ft_strdup(const char *s1);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+char			*ft_strjoin(char const *s1, char const *s2);
+int				ft_strchr(char *s, char c);
+int				get_next_line(int fd, char **line);
 
-void	vertical_movement(t_var *var, double movement_speed, double dirX,
-		double dirY);
-void	horizontal_movement(t_var *var, double movement_speed, double planeX,
-		double planeY);
-void	rotation(t_var *var, double rotation_speed);
+void			vertical_movement(t_var *var, double movement_speed, double dirX,
+				double dirY);
+void			horizontal_movement(t_var *var, double movement_speed, double planeX,
+				double planeY);
+void			rotation(t_var *var, double rotation_speed);
 
-int		key_pressed(int key, t_var *var);
-int		key_released(int key, t_var *var);
-int		move_player(t_var *var);
-
-int		finish();
+int				key_pressed(int key, t_var *var);
+int				key_released(int key, t_var *var);
+int				move_player(t_var *var);
