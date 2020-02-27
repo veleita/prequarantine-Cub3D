@@ -19,18 +19,20 @@ SRCS		= main.c \
 all:		$(NAME)
 				./$(NAME) maps/map1basic.cub
 
-mlx:
-				$(CC) $(WFLAGS) $(INCLUDES) $(FRAMEWORKS) mlx_testing.c && ./a.out
+#mlx:
+#				$(CC) $(WFLAGS) $(INCLUDES) $(FRAMEWORKS) mlx_testing.c && ./a.out
 
-map:
-				$(CC) $(WFLAGS) $(INCLUDES) $(FRAMEWORKS) read_map.c && ./a.out
+#map:
+#				$(CC) $(WFLAGS) $(INCLUDES) $(FRAMEWORKS) read_map.c && ./a.out
+
 $(NAME): $(SRCS)
 				$(CC) -g $(WFLAGS) $(INCLUDES) $(FRAMEWORKS) $(SRCS) -o $(NAME)
 
-map:
-				rm -rf map
-				$(CC) $(WFLAGS) read_map.c -o map
-				./map maps/map1basic.cub
+#map:
+#				rm -rf map
+#				$(CC) $(WFLAGS) read_map.c -o map
+#				./map maps/map1basic.cub
+
 #clean:
 
 fclean:

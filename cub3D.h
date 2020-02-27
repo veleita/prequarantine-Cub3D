@@ -14,8 +14,8 @@ typedef struct	s_color
 
 typedef struct	s_map
 {
-	int			resolutionX;//
-	int			resolutionY;//
+	int			resolution_x;//
+	int			resolution_y;//
 	char		*no;//
 	char		*ea;//
 	char		*we;//
@@ -32,8 +32,6 @@ typedef struct	s_img
 {
 	void		*id;//
 	int			*addr;//
-	int			x;
-	int			y;
 	int			endian;//
 	int			bpp;//
 	int			size_line;//
@@ -41,9 +39,9 @@ typedef struct	s_img
 
 typedef struct	s_ray
 {
-	double		cameraX;//
-	double		raydirx;//
-	double		raydiry;//
+	double		camera_x;//
+	double		dirx;//
+	double		diry;//
 	int			mapx;//
 	int			mapy;//
 	double		sidedistx;//
@@ -54,10 +52,11 @@ typedef struct	s_ray
 	int			stepx;//
 	int			stepy;//
 	int			hit;//
+	double		wallhit_x;
 	int			side;//
-	int			lineHeight;//
-	int			drawStart;//
-	int			drawEnd;//
+	int			lineheight;//
+	int			drawstart;//
+	int			drawend;//
 }				t_ray;
 
 # define A_KEY 0
@@ -80,23 +79,36 @@ typedef struct	s_key
 
 typedef struct	s_camera
 {
-	double		dirX;//
-	double		dirY;//
-	double		planeX;//
-	double		planeY;//
+	double		dir_x;//
+	double		dir_y;//
+	double		plane_x;//
+	double		plane_y;//
 }				t_camera;
+
+typedef struct	s_texture
+{
+	void		*id;//
+	int			width;//
+	int			height;//
+	int			*addr;//
+	int			endian;//
+	int			bpp;//
+	int			size_line;//
+	char		*path;
+}				t_texture;
 
 typedef struct	s_var
 {
 	void		*mlx;//
 	void		*win;//
-	double		posx;//
-	double		posy;//
+	double		pos_x;//
+	double		pos_y;//
 	t_camera	camera;
 	t_ray		ray;
 	t_map		file;
 	t_img		img;
 	t_key		key;
+	t_texture	texture;
 }				t_var;
 
 t_map			read_map(char *file_name, t_var *var, int fd);
@@ -109,7 +121,9 @@ void			render(t_var *var);
 void			get_side_dist(int x, t_var *var);
 void			get_hit(t_var *var);
 void			get_wall(t_var *var);
-void			print_column(t_var *var, int x);
+void			get_wall_hit(t_var *var);
+void			print_column(t_var *var, int x, int texture_x);
+char			*select_texture(t_var *var);
 
 int				ft_strcmp(const char *s1, const char *s2);
 size_t			ft_strlen(const char *s);

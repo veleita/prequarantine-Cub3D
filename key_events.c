@@ -44,15 +44,19 @@ int		move_player(t_var *var)
 	double	rotation_speed;
 
 	movement_speed = 0.1;
-	rotation_speed = 0.05;
+	rotation_speed = 0.15;
 	if (var->key.w == 1)
-		vertical_movement(var, movement_speed, var->camera.dirX, var->camera.dirY);
+		vertical_movement(var, movement_speed, var->camera.dir_x,
+				var->camera.dir_y);
 	if (var->key.s == 1)
-		vertical_movement(var, movement_speed, -var->camera.dirX, -var->camera.dirY);
+		vertical_movement(var, movement_speed, -var->camera.dir_x,
+				-var->camera.dir_y);
 	if (var->key.a == 1)
-		horizontal_movement(var, movement_speed, -var->camera.planeX, -var->camera.planeY);
+		horizontal_movement(var, movement_speed, -var->camera.plane_x,
+				-var->camera.plane_y);
 	if (var->key.d == 1)
-		horizontal_movement(var, movement_speed, var->camera.planeX, var->camera.planeY);
+		horizontal_movement(var, movement_speed, var->camera.plane_x,
+				var->camera.plane_y);
 	if (var->key.left)
 		rotation(var, rotation_speed);
 	if (var->key.right)

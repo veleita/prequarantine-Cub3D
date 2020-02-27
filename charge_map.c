@@ -7,10 +7,10 @@ static t_camera	*set_dir_plane(double dirX, double dirY,
 
 	if (!(camera = (t_camera*)malloc(sizeof(t_camera))))
 		exit(0);
-	camera->dirX = dirX;
-	camera->dirY = dirY;
-	camera->planeX = planeX;
-	camera->planeY = planeY;
+	camera->dir_x = dirX;
+	camera->dir_y = dirY;
+	camera->plane_x = planeX;
+	camera->plane_y = planeY;
 	return (camera);
 }
 
@@ -26,8 +26,8 @@ t_camera	check_coord(char coord, t_map *map, int y, t_var *var)
 		camera = set_dir_plane(1, 0, 0, -0.66);
 	if (coord == 'W')
 		camera = set_dir_plane(-1, 0, 0, 0.66);
-	var->posx = map->x + 0.5;
-	var->posy = y + 0.5;
+	var->pos_x = map->x + 0.5;
+	var->pos_y = y + 0.5;
 	return (*camera);
 }
 
@@ -44,14 +44,13 @@ void	fill_map(char *line, int **map, int x)
 		if (ft_isdigit(line[it]))
 		{
 			map[x][y] = line[it] - 48;
-			printf("%d ", map[x][y]);
+			//printf("%d ", map[x][y]);
 			y++;
-			//printf("?line[it] %d  it %d?\n", line[it], it);
 		}
 		else if (ft_isalpha(line[it]))
 		{
 			map[x][y] = 0;
-			printf("%d ", map[x][y]);
+			//printf("%d ", map[x][y]);
 			y++;
 		}
 		it++;

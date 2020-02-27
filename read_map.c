@@ -2,8 +2,8 @@
 
 static int		init_map(t_map *map)
 {
-	map->resolutionX = 0;
-	map->resolutionY = 0;
+	map->resolution_x = 0;
+	map->resolution_y = 0;
 	map->no = NULL;
 	map->ea = NULL;
 	map->we = NULL;
@@ -24,7 +24,7 @@ static int	get_resolution(char *line, t_map *map)
 {
 	int it;
 
-	if (map->resolutionX != 0 || map->resolutionY != 0)
+	if (map->resolution_x != 0 || map->resolution_y != 0)
 		return (0);
 	it = 0;
 	while (line[it] == ' ' && line[it + 1] != '\0')
@@ -37,23 +37,23 @@ static int	get_resolution(char *line, t_map *map)
 			it++;
 		while (ft_isdigit(line[it]))
 		{
-			map->resolutionX = map->resolutionX * 10 + line[it] - '0';
+			map->resolution_x = map->resolution_x * 10 + line[it] - '0';
 			it++;
 		}
 		while (line[it] == ' ' && line[it + 1] != '\0')
 			it++;
 		while (ft_isdigit(line[it]))
 		{
-			map->resolutionY = map->resolutionY * 10 + line[it] - '0';
+			map->resolution_y = map->resolution_y * 10 + line[it] - '0';
 			it++;
 		}
 	}
-	if (10 >= map->resolutionX || 10 >= map->resolutionY)
+	if (10 >= map->resolution_x || 10 >= map->resolution_y)
 		return (0);
-	if (map->resolutionX > 2560)
-		map->resolutionX = 2560;
-	if (map->resolutionY > 1440)
-		map->resolutionX = 1440;
+	if (map->resolution_x > 2560)
+		map->resolution_x = 2560;
+	if (map->resolution_y > 1440)
+		map->resolution_x = 1440;
 	return (1);
 }
 
@@ -140,7 +140,7 @@ static int	evaluate_map(char *line, int fd, t_map *map, t_var *var)
 				map->ceiling_rgb.b == 0) || (map->floor_rgb.r == 0 &&
 					map->floor_rgb.g == 0 && map->floor_rgb.b == 0)
 			|| map->sprt == 0 || map->so == 0 || map->we == 0 || map->ea == 0
-			|| map->no == 0 || map->resolutionX == 0 || map->resolutionY == 0
+			|| map->no == 0 || map->resolution_x == 0 || map->resolution_y == 0
 			|| map->x != 0)
 	{
 		return (0);//missing information before reading the 2D map, did you
@@ -235,13 +235,15 @@ t_map	read_map(char *file_name, t_var *var, int fd)
 		}
 		else if (ft_strnstr(*line, "F", ft_strlen(*line)/10))
 		{
-			if (map->floor_rgb.r != 0 || map->floor_rgb.g != 0 || map->floor_rgb.b != 0)
+			if (map->floor_rgb.r != 0 || map->floor_rgb.g != 0 ||
+					map->floor_rgb.b != 0)
 				exit(0);
 			map->floor_rgb = get_color(*line);
 		}
 		else if (ft_strnstr(*line, "C", ft_strlen(*line)/10))
 		{
-			if (map->ceiling_rgb.r != 0 || map->ceiling_rgb.g != 0 || map->ceiling_rgb.b != 0)
+			if (map->ceiling_rgb.r != 0 || map->ceiling_rgb.g != 0 ||
+					map->ceiling_rgb.b != 0)
 				exit(0);
 			map->ceiling_rgb = get_color(*line);
 		}
