@@ -43,7 +43,7 @@ int		move_player(t_var *var)
 	double	movement_speed;
 	double	rotation_speed;
 
-	movement_speed = 0.1;
+	movement_speed = 0.3;
 	rotation_speed = 0.15;
 	if (var->key.w == 1)
 		vertical_movement(var, movement_speed, var->camera.dir_x,

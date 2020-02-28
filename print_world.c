@@ -21,7 +21,7 @@ int		get_texture_pos(int texture_x, int texture_y, t_texture *texture)
 
 static int		*create_texture(t_var *var)
 {
-	var->texture.id = mlx_xpm_file_to_image(var->mlx, var->file.we,
+	var->texture.id = mlx_xpm_file_to_image(var->mlx, var->texture.path,
 			&var->texture.width, &var->texture.height);
 	var->texture.addr = (int*)mlx_get_data_addr(var->texture.id, 
 			&var->texture.bpp, &var->texture.size_line, &var->texture.endian);
@@ -42,7 +42,7 @@ void	print_column(t_var *var, int x, int texture_x)
 	y = -1;
 	while (y < var->ray.drawstart)
 		var->img.addr[++y * var->file.resolution_x + x] = 
-			rgb_to_hex(var->file.floor_rgb);
+			rgb_to_hex(var->file.ceiling_rgb);
 	step = 1.0 * var->texture.height / var->ray.lineheight;
 	texture_pos = (var->ray.drawstart - var->file.resolution_y / 2 +
 			var->ray.lineheight / 2) * step;
@@ -52,12 +52,9 @@ void	print_column(t_var *var, int x, int texture_x)
 		texture_pos += step;
 		var->img.addr[(y++ * var->file.resolution_x) + x] = 
 			var->texture.addr[(int)(texture_y * var->texture.width + texture_x)];
-			//get_texture_pos(texture_x, texture_y, &var->texture);
 	}
 	mlx_destroy_image(var->mlx, var->texture.id);
-		/*if (var->ray.side)
-			var->img.addr[++y * var->file.resolutionX + x] = 0x222c2e/2;
-		var->img.addr[++y * var->file.resolutionX + x] = 0x222cff;*/
 	while (y < (var->file.resolution_y - 1))
-		var->img.addr[++y * var->file.resolution_x + x] = 0xd7eff5;
+		var->img.addr[++y * var->file.resolution_x + x] = 
+			rgb_to_hex(var->file.floor_rgb);
 }

@@ -60,13 +60,13 @@ void	get_wall_hit(t_var *var)
 	{
 		var->ray.wallhit_x = var->pos_x + ((var->ray.mapy - var->pos_y
 		+ (1 - var->ray.stepy) / 2) / var->ray.diry) * var->ray.dirx;
-		//var->texture.path = var->ray.diry < 0 ? var->file.no : var->file.ea;
+		var->texture.path = var->ray.diry < 0 ? var->file.no : var->file.ea;
 	}
 	else
 	{
 		var->ray.wallhit_x = var->pos_y + ((var->ray.mapx - var->pos_x
 		+ (1 - var->ray.stepx) / 2) / var->ray.dirx) * var->ray.diry;
-		//var->texture.path = var->ray.dirx < 0 ? var->file.so : var->file.we;
+		var->texture.path = var->ray.dirx < 0 ? var->file.so : var->file.we;
 	}
 	var->ray.wallhit_x -= floor(var->ray.wallhit_x);
 }

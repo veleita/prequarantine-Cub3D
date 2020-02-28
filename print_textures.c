@@ -32,13 +32,9 @@ int	main()
 		return (0);
 	if (!(win = mlx_new_window(mlx, resolution_x, resolution_y, "cub3D")))
 		return (0);
-	if (!(id = mlx_new_image(mlx, resolution_x, resolution_y)))
-		return (0);
-	addr = (int*)mlx_get_data_addr(id, &bpp, &size_line, &endian);
-	ft_bzero(addr, resolution_x * resolution_y);
-	int	*texture_image = mlx_xpm_file_to_image(mlx, "textures/eagle.xpm",
-			&width, &height);
-	mlx_put_image_to_window(mlx, win, id, 0, 0);
+	void	*texture_image = mlx_xpm_file_to_image(mlx, "textures/wood.xpm", &width, &height);
+	addr = (int*)mlx_get_data_addr(texture_image, &bpp, &size_line, &endian);
+	mlx_put_image_to_window(mlx, win, texture_image, 0, 0);
 	mlx_loop(mlx);
 	return (1);
 }
