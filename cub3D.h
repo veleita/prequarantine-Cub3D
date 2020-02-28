@@ -125,6 +125,7 @@ void			get_wall_hit(t_var *var);
 void			print_column(t_var *var, int x, int texture_x);
 char			*select_texture(t_var *var);
 
+void			remove_space(char *line, int *it);
 int				ft_strcmp(const char *s1, const char *s2);
 size_t			ft_strlen(const char *s);
 char			*ft_strnstr(const char *haystack, const char *needle, size_t len);

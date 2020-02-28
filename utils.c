@@ -1,6 +1,12 @@
 #include "cub3D.h"
 #include <unistd.h>
 
+void	remove_space(char *line, int *it)
+{
+	while (line[*it] == ' ')
+		(*it)++;
+}
+
 int		ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 || *s2)
